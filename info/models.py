@@ -17,9 +17,6 @@ class BaseModel(TimeStampedModel):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    def __str__(self):
-        return "{0}".format(self.name)
-
 
 class MasterPage(BaseModel):
     meta = HStoreField(blank=True, null=True)
