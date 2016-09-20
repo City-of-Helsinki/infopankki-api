@@ -46,7 +46,7 @@ LOCAL_APPS = (
     # custom users app
     'infopankki.users.apps.UsersConfig',
     # Your stuff: custom apps go here
-    'infopankki.info',
+    'info',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -1,7 +1,7 @@
 
 import uuid
 from django.db import models
-from django.contrib.postgres.fields import HStoreField, JSONField, ArrayField
+from django.contrib.postgres.fields import HStoreField
 from django_extensions.db.models import TimeStampedModel
 
 
@@ -23,11 +23,16 @@ class BaseModel(TimeStampedModel):
 
 class MasterPage(BaseModel):
     meta = HStoreField(blank=True, null=True)
+    page_guid = models.CharField("Original page GUID", max_length=50, editable=False)
 
 
 class Page(BaseModel):
+    master = models.ForeignKey(MasterPage)
     language = models.CharField(max_length=3)
     meta = HStoreField(blank=True, null=True)
-    collection = models.ForeignKey(MasterPage)
 
 
+class Doc(BaseModel):
+    page = models.ForeignKey(Page)
+    doc_id = models.IntegerField("Original document ID", editable=False)
+    content = models.TextField()
