@@ -27,9 +27,6 @@ class Page(BaseModel):
     master = models.ForeignKey(MasterPage)
     language = models.CharField(max_length=3)
     meta = HStoreField(blank=True, null=True)
-
-
-class Doc(BaseModel):
-    page = models.ForeignKey(Page)
-    doc_id = models.IntegerField("Original document ID", editable=False)
-    content = models.TextField()
+    doc_title = models.TextField(blank=True, null=True)
+    doc_id = models.IntegerField("Original document ID", editable=False, blank=True, null=True)
+    content = models.TextField(blank=True, null=True)

@@ -71,3 +71,6 @@ INSTALLED_APPS += ('django_extensions', )
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Your local stuff: Below this line define 3rd party library settings
+
+INFOPANKKI_DATA_PATH = 'data/'
+INFOPANKKI_DUMP = 'data/sivurakenne.xml'
