@@ -29,7 +29,7 @@ def parse_meta(items, languages):
         lang = data.get('language', False)
         if lang and lang in languages:
             meta[lang][data['name']] = item.text
-        else:
+        elif not lang:
             meta[data['name']] = item.text
 
     return meta
