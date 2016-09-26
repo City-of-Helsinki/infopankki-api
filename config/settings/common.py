@@ -39,7 +39,8 @@ THIRD_PARTY_APPS = (
     'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
+    'allauth.socialaccount',  # registration,
+    'rest_framework',  # REST APIs
 )
 
 # Apps specific for this project go here.
@@ -239,3 +240,7 @@ ADMIN_URL = r'^admin/'
 
 
 # Your common stuff: Below this line define 3rd party library settings
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}

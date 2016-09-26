@@ -17,10 +17,11 @@ def read(dump=settings.INFOPANKKI_DUMP):
 def parse_meta(items, languages):
     """
     Creates dictionary from meta data where each key and its value
-    is put under its language
+    is put under its language if active
+    Meta items without language is put directly
 
     :param items:[item element]
-    :return:{{}}
+    :return:{}
     """
     meta = defaultdict(dict)
 
