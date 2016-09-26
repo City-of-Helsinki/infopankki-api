@@ -6,15 +6,15 @@ import os.path
 from django.conf import settings
 
 PageData = namedtuple('PageData', ['languages', 'documents', 'meta', 'guid'])
-Document = namedtuple('Document', ['doc_id', 'path', 'content', 'language'])
+Document = namedtuple('Document', ['doc_id', 'path', 'language', 'title'])
 
 
-def read(doc=settings.INFOPANKKI_DUMP):
-    x = etree.parse(doc)
+def read(dump=settings.INFOPANKKI_DUMP):
+    x = etree.parse(dump)
     return [page_to_data(page) for page in x.xpath('//page')]
 
 
-def parse_meta(items):
+def parse_meta(items, languages):
     """
     Creates dictionary from meta data where each key and its value
     is put under its language
@@ -27,7 +27,7 @@ def parse_meta(items):
     for item in items:
         data = item.attrib
         lang = data.get('language', False)
-        if lang:
+        if lang and lang in languages:
             meta[lang][data['name']] = item.text
         else:
             meta[data['name']] = item.text
@@ -38,7 +38,7 @@ def parse_meta(items):
 def parse_docs(docs):
     """
     Documents have page's content
-    :param doc:document element
+    :param docs:document element
     :return:{}
     """
     resp = {}
@@ -61,12 +61,12 @@ def page_to_data(page):
     :param page:page element
     :return:PageData
     """
-
+    languages = [elem.text for elem in page.xpath('activelanguages/language')]
     return PageData(
         guid=page.attrib['guid'],
-        languages=[elem.text for elem in page.xpath('activelanguages/language')],
+        languages=languages,
         documents=parse_docs(page.xpath('controls/control/configuration/document')),
-        meta=parse_meta(page.xpath('meta/item'))
+        meta=parse_meta(page.xpath('meta/item'), languages)
     )
 
 
@@ -86,14 +86,19 @@ def pagedata_to_db(pagedata):
     master.save()
 
     for lang in pagedata.languages:
-        doc = pagedata.documents[lang]
-        meta = pagedata.meta[lang]
+        if pagedata.documents.get(lang):
+            doc = pagedata.documents[lang]
+            meta = pagedata.meta[lang]
+            page = Page(master=master,
+                        language=lang,
+                        meta=meta,
+                        doc_id=doc.doc_id,
+                        doc_title=doc.title,
+                        content=get_content(doc.path))
+            page.save()
 
-        page = Page(master=master,
-                    language=lang,
-                    meta=meta,
-                    doc_id=doc.doc_id,
-                    content=get_content(doc.path),
-                    title=doc.title)
 
-        page.save()
+def do_import():
+
+    for page in read():
+        pagedata_to_db(page)
