@@ -24,7 +24,7 @@ class MasterPage(BaseModel):
 
 
 class Page(BaseModel):
-    master = models.ForeignKey(MasterPage)
+    master = models.ForeignKey(MasterPage, related_name="pages")
     language = models.CharField(max_length=3)
     meta = HStoreField(blank=True, null=True)
     doc_title = models.TextField(blank=True, null=True)

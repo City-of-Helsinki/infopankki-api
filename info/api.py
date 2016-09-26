@@ -19,7 +19,7 @@ class PageDetailSerializer(serializers.ModelSerializer):
 
 class PageViewSet(viewsets.ModelViewSet):
 
-    queryset = Page.objects.all().order_by('modified')
+    queryset = Page.objects.all().order_by('-modified')
 
     def get_serializer_class(self):
         if self.action == 'list':
