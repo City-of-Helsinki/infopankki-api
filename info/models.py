@@ -30,3 +30,8 @@ class Page(BaseModel):
     doc_title = models.TextField(blank=True, null=True)
     doc_id = models.IntegerField("Original document ID", editable=False, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
+
+
+class Embed(models.Model):
+    page = models.ForeignKey(Page, related_name='embeds')
+    uri = models.URLField(blank=True, null=True)

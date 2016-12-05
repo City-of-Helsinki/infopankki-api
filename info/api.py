@@ -13,7 +13,7 @@ class PageSerializer(serializers.HyperlinkedModelSerializer):
 class PageDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
-        fields = ['language', 'meta', 'created', 'modified', 'content']
+        fields = ['language', 'meta', 'created', 'modified', 'content', 'embeds']
         read_only_fields = ['language', 'meta', 'created', 'modified', 'url']
 
 
