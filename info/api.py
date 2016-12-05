@@ -1,6 +1,12 @@
 
-from info.models import MasterPage, Page
+from info.models import MasterPage, Page, Embed
 from rest_framework import serializers, viewsets
+
+
+class EmbedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Embed
+        fields = ['uri']
 
 
 class PageSerializer(serializers.HyperlinkedModelSerializer):
@@ -11,6 +17,8 @@ class PageSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PageDetailSerializer(serializers.ModelSerializer):
+    embeds = EmbedSerializer(many=True, read_only=True)
+
     class Meta:
         model = Page
         fields = ['language', 'meta', 'created', 'modified', 'content', 'embeds']
