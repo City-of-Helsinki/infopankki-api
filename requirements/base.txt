@@ -53,3 +53,4 @@ django-compressor==2.1
 
 # Your custom requirements go here
 djangorestframework<3.5
+django-extensions<1.8

@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'django_extensions',
     # custom users app
     'infopankki.users.apps.UsersConfig',
     # Your stuff: custom apps go here
