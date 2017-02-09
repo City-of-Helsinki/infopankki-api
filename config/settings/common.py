@@ -243,6 +243,9 @@ ADMIN_URL = r'^admin/'
 # Your common stuff: Below this line define 3rd party library settings
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_PERMISSION_CLASSES': [],
     'PAGE_SIZE': 10
 }
+
+INFOPANKKI_DUMP = env('INFOPANKKI_DUMP', default='data/InfopankkiStructure.xml')
+INFOPANKKI_DATA_PATH = env('INFOPANKKI_DATA_PATH', default="data/")
