@@ -2,7 +2,6 @@
 from info.models import MasterPage, Page, Embed
 from rest_framework import serializers, viewsets
 
-
 class EmbedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Embed
@@ -25,7 +24,7 @@ class PageDetailSerializer(serializers.ModelSerializer):
         read_only_fields = ['language', 'meta', 'created', 'modified', 'url']
 
 
-class PageViewSet(viewsets.ModelViewSet):
+class PageViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = Page.objects.all().order_by('-modified')
 
