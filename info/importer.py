@@ -140,7 +140,7 @@ def do_import():
 
 def combine_paths_to_query(paths):
     ops = ['/{}/'.format(i) for i in paths]
-    ops += ['/{}-/'.format(i) for i in paths]
+    ops += ['/{}-'.format(i) for i in paths]
     ops += ['-{}-'.format(i) for i in paths]
     return functools.reduce(operator.or_, (Q(meta__url__contains=city_url) for city_url in ops))
 
