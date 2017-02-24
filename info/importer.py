@@ -4,6 +4,10 @@ from info.models import MasterPage, Page, Embed
 from collections import namedtuple, defaultdict
 import os.path
 from django.conf import settings
+from django.db.models import Q
+import operator
+import functools
+import json
 
 PageData = namedtuple('PageData', ['languages', 'documents', 'meta', 'guid', 'embeds'])
 Document = namedtuple('Document', ['doc_id', 'path', 'language', 'title'])
@@ -132,3 +136,20 @@ def do_import():
 
     for page in read():
         pagedata_to_db(page)
+
+
+def combine_paths_to_query(paths):
+    ops = ['/{}/'.format(i) for i in paths]
+    ops += ['/{}-/'.format(i) for i in paths]
+    ops += ['-{}-'.format(i) for i in paths]
+    return functools.reduce(operator.or_, (Q(meta__url__contains=city_url) for city_url in ops))
+
+
+def export(export_file_path, excludes):
+    some_of_these_paths = combine_paths_to_query(excludes)
+    remaining_pages = Page.objects.exclude(some_of_these_paths)
+    remaining_masters = {r.master for r in remaining_pages}
+    out = [
+        [{'url': p.meta['url'], 'language': p.language, 'content': p.content}
+         for p in r.pages.all()] for r in remaining_masters]
+    json.dump(out, export_file_path, indent=2)
