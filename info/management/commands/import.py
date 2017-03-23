@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from django.conf import settings
+
 import info.importer
 from info.models import MasterPage, Page
 
@@ -17,8 +17,3 @@ class Command(BaseCommand):
         info.importer.do_import()
         print('After import master page count', MasterPage.objects.count())
         print('After import page count', Page.objects.count())
-
-        if settings.HEALTHCHECK:
-            print('Send health check')
-            import urllib.request
-            urllib.request.urlopen(settings.HEALTHCHECK)
