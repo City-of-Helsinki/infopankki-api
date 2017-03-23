@@ -8,6 +8,7 @@ from django.db.models import Q
 import operator
 import functools
 import json
+from django.db import transaction
 
 PageData = namedtuple('PageData', ['languages', 'documents', 'meta', 'guid', 'embeds'])
 Document = namedtuple('Document', ['doc_id', 'path', 'language', 'title'])
@@ -132,10 +133,12 @@ def pagedata_to_db(pagedata):
                 embed.save()
 
 
+@transaction.atomic
 def do_import():
-
-    for page in read():
-        pagedata_to_db(page)
+    with transaction.atomic():
+        MasterPage.objects.all().delete()
+        for page in read():
+            pagedata_to_db(page)
 
 
 def combine_paths_to_query(paths):
