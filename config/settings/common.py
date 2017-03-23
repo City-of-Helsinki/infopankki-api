@@ -252,3 +252,4 @@ REST_FRAMEWORK = {
 
 INFOPANKKI_DUMP = env('INFOPANKKI_DUMP', default='data/InfopankkiStructure.xml')
 INFOPANKKI_DATA_PATH = env('INFOPANKKI_DATA_PATH', default="data/")
+HEALTHCHECK = env('HEALTHCHECK', default=None)
