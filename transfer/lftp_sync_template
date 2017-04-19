@@ -1,4 +1,5 @@
 set net:timeout 10
 set ssl:verify-certificate no
+set ftp:ssl-protect-data true
 open ftps://$USERNAME:$PASSWORD@$SERVER
-mirror -P 10 -q -c / data/
+mirror -P 10 -c / data/
