@@ -22,6 +22,20 @@ class MasterPage(BaseModel):
     meta = HStoreField(blank=True, null=True)
     page_guid = models.CharField("Original page GUID", max_length=50, editable=False)
 
+    def __str__(self):
+
+        fi_page = self.pages.filter(language='fi')
+        if not fi_page:
+            return str(self.id)
+        else:
+            try:
+                return fi_page[0].meta['url'].split('/', 1)[1]
+            except KeyError:
+                return str(self.id)
+
+    def __rep__(self):
+        return str(self)
+
 
 class Page(BaseModel):
     master = models.ForeignKey(MasterPage, related_name="pages")
@@ -30,6 +44,9 @@ class Page(BaseModel):
     doc_title = models.TextField(blank=True, null=True)
     doc_id = models.IntegerField("Original document ID", editable=False, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
+
+    def __repr__(self):
+        return self.meta['url']
 
 
 class Embed(models.Model):

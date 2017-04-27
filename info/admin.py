@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import MasterPage
 
-# Register your models here.
+
+class MasterPageAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(MasterPage, MasterPageAdmin)
