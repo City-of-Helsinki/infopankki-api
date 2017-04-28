@@ -4,6 +4,11 @@ from django.shortcuts import render, get_object_or_404
 from .models import Page
 
 
+def translate_view(request, page):
+    page = get_object_or_404(Page, pk=page)
+    twin = page.master.pages.get(language='fi')
+
+
 def page_view(request, page):
     page = get_object_or_404(Page, pk=page)
     siblings = [p for p in page.master.pages.all() if p.language != 'fi']

@@ -8,7 +8,7 @@
 <h2>Valitse käännettävä kieli</h2>
 <div>
     {% for sibling in siblings %}
-        {{ sibling.language }}
+        <a href="{% url "translate_page" sibling.pk %}">{{ sibling.language|upper }}</a>
     {% endfor %}
 </div>
 
