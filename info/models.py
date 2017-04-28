@@ -23,15 +23,7 @@ class MasterPage(BaseModel):
     page_guid = models.CharField("Original page GUID", max_length=50, editable=False)
 
     def __str__(self):
-
-        fi_page = self.pages.filter(language='fi')
-        if not fi_page:
-            return str(self.id)
-        else:
-            try:
-                return fi_page[0].meta['url'].split('/', 1)[1]
-            except KeyError:
-                return str(self.id)
+        return str(self.id)
 
     def __rep__(self):
         return str(self)
