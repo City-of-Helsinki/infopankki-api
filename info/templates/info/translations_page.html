@@ -1,0 +1,15 @@
+
+<html>
+
+<h1>Käännettävä sivu</h1>
+<h2>{{ page.meta.title }}</h2>
+<h2>{{ page.meta.url }}</h2>
+
+<h2>Valitse käännettävä kieli</h2>
+<div>
+    {% for sibling in siblings %}
+        {{ sibling.language }}
+    {% endfor %}
+</div>
+
+</html>

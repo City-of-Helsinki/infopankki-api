@@ -1,0 +1,16 @@
+
+<html>
+<h1>Käännöstuki</h1>
+<table>
+    {% for page in pages %}
+        <tr>
+            <td>
+                <a href="{% url "master_page" page.pk %}">{{ page.meta.url }}</a>
+            </td>
+            <td>
+                {{ page.doc_title }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</html>
