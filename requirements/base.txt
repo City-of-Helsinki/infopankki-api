@@ -56,3 +56,5 @@ djangorestframework<3.5
 django-debug-toolbar==1.5
 django-extensions<1.8
 lxml
+raven
+xlsxwriter
