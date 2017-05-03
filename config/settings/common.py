@@ -41,7 +41,8 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration,
     'rest_framework',  # REST APIs
-    'rest_framework_swagger', # Swagger/Open API
+    'rest_framework_swagger',  # Swagger/Open API
+    'rest_framework_docs',   # DRFDocs
 )
 
 # Apps specific for this project go here.
