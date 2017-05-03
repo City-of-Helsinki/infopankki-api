@@ -41,6 +41,7 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration,
     'rest_framework',  # REST APIs
+    'rest_framework_swagger', # Swagger/Open API
 )
 
 # Apps specific for this project go here.
@@ -228,7 +229,7 @@ SOCIALACCOUNT_ADAPTER = 'infopankki.users.adapters.SocialAccountAdapter'
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'users:redirect'
-LOGIN_URL = 'account_login'
+# LOGIN_URL = 'account_login'
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
