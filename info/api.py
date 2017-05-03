@@ -2,6 +2,7 @@
 from info.models import MasterPage, Page, Embed
 from rest_framework import serializers, viewsets
 
+
 class EmbedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Embed
@@ -25,6 +26,13 @@ class PageDetailSerializer(serializers.ModelSerializer):
 
 
 class PageViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    list:
+    Contains metadata and links to individual *Infopankki* page resources
+    
+    read:
+    Page contains metadata and content of individual *Infopankki* page
+    """
 
     queryset = Page.objects.all().order_by('-modified')
 
