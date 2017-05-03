@@ -5,7 +5,7 @@
 wheel==0.29.0
 
 # Bleeding edge Django
-django==1.9.9
+django<1.12
 
 # Configuration
 django-environ==0.4.0
@@ -52,7 +52,8 @@ django-compressor==2.1
 
 
 # Your custom requirements go here
-djangorestframework<3.5
+djangorestframework<3.7
+rest_framework_swagger<2.2
 django-debug-toolbar==1.5
 django-extensions<1.8
 lxml
