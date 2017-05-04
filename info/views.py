@@ -6,6 +6,8 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.apps import apps
 from django.conf import settings
+from django.utils.html import strip_tags
+
 
 from .models import Page
 
@@ -74,15 +76,15 @@ def make_translation_excel(output, page, fi_page):
     worksheet = workbook.add_worksheet("Käännettävät sivut")
     header_format = workbook.add_format({'bold': True})
     worksheet.write(0, 0, "FI page", header_format)
-    worksheet.write(0, 0, page.language.upper() + " page", header_format)
-    worksheet.set_column(0, 0, 120)
-    worksheet.set_column(0, 1, 120)
+    worksheet.write(0, 1, page.language.upper() + " page", header_format)
+    worksheet.set_column(0, 0, 100)
+    worksheet.set_column(0, 1, 100)
 
-    for index, row in enumerate(fi_page.content.split("\n")):
-        worksheet.write(index, 0, row)
+    for index, row in enumerate(strip_tags(fi_page.content).split("\n")):
+        worksheet.write(index, 0, row.strip())
 
-    for index, row in enumerate(page.content.split("\n")):
-        worksheet.write(index, 1, row)
+    for index, row in enumerate(strip_tags(page.content).split("\n")):
+        worksheet.write(index, 1, row.strip())
 
     workbook.close()
     return True
