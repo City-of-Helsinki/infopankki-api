@@ -41,7 +41,7 @@ addons:
     - curl
     - llvm
 
-install: pip install pytest-cov -r requirements/base.txt -r requirements/test.txt
+install: pip install pytest-cov -r requirements.txt
 
 script:
   - flake8

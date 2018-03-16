@@ -1,0 +1,8 @@
+-c requirements.txt
+flake8
+ipython
+pytest
+pytest-cov
+pytest-django
+isort
+django-debug-toolbar
