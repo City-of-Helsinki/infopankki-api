@@ -8,6 +8,7 @@ djangorestframework
 django-extensions
 lxml
 xlsxwriter
+coreapi
 
 coverage
 django-coverage-plugin

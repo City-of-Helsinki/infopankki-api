@@ -7,6 +7,8 @@
 attrs==17.4.0             # via pytest
 certifi==2018.1.18        # via requests
 chardet==3.0.4            # via requests
+coreapi==2.3.3
+coreschema==0.0.4         # via coreapi
 coverage==4.5.1
 django-coverage-plugin==1.5.0
 django-environ==0.4.4
@@ -19,7 +21,10 @@ factory-boy==2.10.0
 faker==0.8.12             # via factory-boy
 flake8==3.5.0
 idna==2.6                 # via requests
+itypes==1.1.0             # via coreapi
+jinja2==2.10              # via coreschema
 lxml==4.2.0
+markupsafe==1.0           # via jinja2
 mccabe==0.6.1             # via flake8
 pluggy==0.6.0             # via pytest
 psycopg2==2.7.4
@@ -36,5 +41,6 @@ requests==2.18.4
 six==1.11.0               # via django-coverage-plugin, django-environ, django-extensions, faker, pytest, python-dateutil
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.2       # via faker
+uritemplate==3.0.0        # via coreapi
 urllib3==1.22             # via requests
 xlsxwriter==1.0.2
