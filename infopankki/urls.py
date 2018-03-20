@@ -8,15 +8,18 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
-urlpatterns = [
+urlpatterns = [] 
+urlpatterns += static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(
+    settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += [
     # Django Admin, use {% url 'admin:index' %}
     url(r'^admin/', include(admin.site.urls)),
-
     # Your stuff: custom urls includes go here
     url(r'', include('info.urls')),
-
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
 
 if settings.DEBUG:
     import debug_toolbar
