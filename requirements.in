@@ -9,6 +9,7 @@ django-extensions
 lxml
 xlsxwriter
 coreapi
+whitenoise
 
 coverage
 django-coverage-plugin
