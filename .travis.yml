@@ -1,50 +1,30 @@
+
+sudo: required
+
+services:
+  - docker
+
 language: python
+python:
+  - '3.6'
+  - '3.7-dev'
+
+matrix:
+  allow_failures:
+  - python: "3.7-dev"
 
 cache: pip
 
-python:
-  - '3.5'
-  - '3.6'
-  - 'nightly'
+install: 'pip install -r requirements.txt'
 
-addons:
-  apt:
-    packages:
-    - build-essential
-    - gettext
-    - python-dev
-    - zlib1g-dev
-    - libpq-dev
-    - xvfb
-    - libtiff4-dev
-    - libjpeg8-dev
-    - libfreetype6-dev
-    - liblcms1-dev
-    - libwebp-dev
-    - graphviz-dev
-    - python-setuptools
-    - python3-dev
-    - python-virtualenv
-    - python-pip
-    - firefox
-    - automake
-    - libtool
-    - libreadline6
-    - libreadline6-dev
-    - libreadline-dev
-    - libsqlite3-dev
-    - libxml2
-    - libxml2-dev
-    - libssl-dev
-    - libbz2-dev
-    - wget
-    - curl
-    - llvm
-
-install: pip install pytest-cov -r requirements/base.txt -r requirements/test.txt
+env:
+  - DEBUG=True
 
 script:
-  - flake8
-  - pytest --cov=.
+  - "true"
 
-after_success: codecov
+addons:
+  postgresql: '9.6'
+
+after_success:
+  - ./deploy/containerize.sh
