@@ -26,7 +26,7 @@ env = environ.Env(
     STATIC_URL=(str, '/static/'),
     SENTRY_DSN=(str, ''),
     COOKIE_PREFIX=(str, 'infopankki'),
-    SECURE_PROXY_SSL = (bool, False)
+    SECURE_PROXY = (bool, False)
 )
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
