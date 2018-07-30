@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r deploy/requirements.txt
 
 COPY . .
 
-CMD deploy/server.sh
+CMD ["deploy/server.sh"]
