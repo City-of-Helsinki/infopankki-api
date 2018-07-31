@@ -30,7 +30,7 @@ env = environ.Env(
 )
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
-if env('SECURE_PROXY_SSL'):
+if env('SECURE_PROXY'):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DEBUG = env('DEBUG')
