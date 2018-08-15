@@ -38,7 +38,7 @@ class Page(BaseModel):
     content = models.TextField(blank=True, null=True)
 
     def __repr__(self):
-        return self.meta['url']
+        return self.meta.get('url', self.pk)
 
 
 class Embed(models.Model):
