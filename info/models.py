@@ -1,7 +1,7 @@
 
 import uuid
 from django.db import models
-from django.contrib.postgres.fields import HStoreField
+from django.contrib.postgres.fields import HStoreField, ArrayField
 from django_extensions.db.models import TimeStampedModel
 
 
@@ -36,6 +36,7 @@ class Page(BaseModel):
     doc_title = models.TextField(blank=True, null=True)
     doc_id = models.IntegerField("Original document ID", editable=False, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
+    tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
 
     def __repr__(self):
         return self.meta.get('url', self.pk)
