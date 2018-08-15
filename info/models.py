@@ -37,6 +37,7 @@ class Page(BaseModel):
     doc_id = models.IntegerField("Original document ID", editable=False, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
+    url = models.URLField(blank=True, null=True)
 
     def __repr__(self):
         return self.meta.get('url', self.pk)

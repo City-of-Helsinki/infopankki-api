@@ -119,12 +119,17 @@ def pagedata_to_db(pagedata):
             doc = pagedata.documents[lang]
             meta = pagedata.meta[lang]
             embeds = pagedata.embeds[lang]
+            if meta.get("url"):
+                url = "https://www.infopankki.fi/" + meta.get("url")
+            else:
+                url = None
             page = Page(master=master,
                         language=lang,
                         meta=meta,
                         doc_id=doc.doc_id,
                         doc_title=doc.title,
-                        content=get_content(doc.path))
+                        content=get_content(doc.path),
+                        url = url)
             page.save()
             for embed_data in embeds:
                 # Embed is assumed to be valid dict for Embed class at this stage
