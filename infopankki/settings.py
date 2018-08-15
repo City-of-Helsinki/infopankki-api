@@ -26,7 +26,9 @@ env = environ.Env(
     STATIC_URL=(str, '/static/'),
     SENTRY_DSN=(str, ''),
     COOKIE_PREFIX=(str, 'infopankki'),
-    SECURE_PROXY = (bool, False)
+    SECURE_PROXY = (bool, False),
+    INFOPANKKI_DUMP = (str, ''),
+    INFOPANKKI_DATA_PATH = (str, '')
 )
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'rest_framework',
 
     'info',
@@ -125,17 +128,8 @@ if env('SECRET_KEY'):
 
 # infopankki settings
 
-TWITTER_CONSUMER_KEY = env('TWITTER_CONSUMER_KEY', default='')
-TWITTER_CONSUMER_SECRET = env('TWITTER_CONSUMER_SECRET', default='')
-TWITTER_ACCESS_TOKEN = env('TWITTER_ACCESS_TOKEN', default='')
-TWITTER_ACCESS_TOKEN_SECRET = env('TWITTER_ACCESS_TOKEN_SECRET', default='')
-
-OPEN311_API_KEY = env('OPEN311_API_KEY', default='')
-OPEN311_API_SERVICE_CODE = env('OPEN311_API_SERVICE_CODE', default='')
-OPEN311_POST_API_URL = env('OPEN311_POST_API_URL', default='')
-
-SEARCH_STRING = env('SEARCH_STRING', default='')
-
+INFOPANKKI_DUMP = env('INFOPANKKI_DUMP')
+INFOPANKKI_DATA_PATH = env('INFOPANKKI_DATA_PATH')
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
