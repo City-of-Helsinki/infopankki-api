@@ -128,6 +128,10 @@ MEDIA_ROOT = env('MEDIA_ROOT')
 if env('SECRET_KEY'):
     SECRET_KEY = env('SECRET_KEY')
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
 
 # infopankki settings
 
