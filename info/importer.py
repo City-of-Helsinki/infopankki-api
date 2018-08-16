@@ -142,12 +142,23 @@ def pagedata_to_db(pagedata):
                 page.save()
 
 
+def link_meta_tags():
+    PageMeta.objects.all()
+    for m in Page.objects.filter(tags__isnull=False):
+        for t in m.tags:
+            tag, created = PageMeta.objects.get_or_create(name=t, slug=t)
+            tag.pages.add(m)
+            tag.save()
+
+
 @transaction.atomic
 def do_import():
     with transaction.atomic():
         MasterPage.objects.all().delete()
         for page in read():
             pagedata_to_db(page)
+    
+    link_meta_tags()
 
 
 def combine_paths_to_query(paths):
