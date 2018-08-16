@@ -1,6 +1,6 @@
 
 from lxml import etree
-from info.models import MasterPage, Page, Embed
+from info.models import MasterPage, Page, Embed, PageMeta
 from collections import namedtuple, defaultdict
 import os.path
 from django.conf import settings
@@ -136,6 +136,10 @@ def pagedata_to_db(pagedata):
                 # TODO: Add some validation for embeds when Real Data arrives
                 embed = Embed(page=page, **embed_data)
                 embed.save()
+            desc = meta.get('description')
+            if desc:
+                page.tags = desc.split(' | ')
+                page.save()
 
 
 @transaction.atomic
