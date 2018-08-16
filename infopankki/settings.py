@@ -26,11 +26,14 @@ env = environ.Env(
     STATIC_URL=(str, '/static/'),
     SENTRY_DSN=(str, ''),
     COOKIE_PREFIX=(str, 'infopankki'),
+    USE_X_FORWARDED_HOST = (bool, False),
     SECURE_PROXY = (bool, False),
     INFOPANKKI_DUMP = (str, ''),
     INFOPANKKI_DATA_PATH = (str, '')
 )
 env.read_env(os.path.join(BASE_DIR, '.env'))
+
+USE_X_FORWARDED_HOST = deploy_env('USE_X_FORWARDED_HOST')
 
 if env('SECURE_PROXY'):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
