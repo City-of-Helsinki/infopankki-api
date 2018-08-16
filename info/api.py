@@ -1,5 +1,5 @@
 
-from info.models import MasterPage, Page, Embed
+from info.models import MasterPage, Page, Embed, PageMeta
 from rest_framework import serializers, viewsets
 
 
@@ -43,3 +43,50 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
             return PageDetailSerializer
         else:
             return PageSerializer
+
+
+class PageMetaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PageMeta
+        fields = ['name', 'url']
+
+
+class PageUrlSerializer(serializers.ModelSerializer):
+
+    url = serializers.HyperlinkedIdentityField(view_name='page-detail')
+
+    class Meta:
+        model = Page
+        fields = ['url']
+
+
+class PageMetaDetailSerializer(serializers.ModelSerializer):
+
+    pages = PageUrlSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = PageMeta
+        fields = ['name', 'pages']
+
+
+class PageMetaViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    
+    list:
+    
+    
+    read:
+    
+    
+    """
+
+    queryset = PageMeta.objects.all().order_by('slug')
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return PageMetaSerializer
+        elif self.action == 'retrieve':
+            return PageMetaDetailSerializer
+        else:
+            return PageMetaSerializer
