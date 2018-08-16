@@ -33,7 +33,7 @@ env = environ.Env(
 )
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
-USE_X_FORWARDED_HOST = deploy_env('USE_X_FORWARDED_HOST')
+USE_X_FORWARDED_HOST = env('USE_X_FORWARDED_HOST')
 
 if env('SECURE_PROXY'):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
