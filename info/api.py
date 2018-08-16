@@ -50,6 +50,10 @@ class PageMetaSerializer(serializers.ModelSerializer):
     class Meta:
         model = PageMeta
         fields = ['name', 'url']
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
 
 
 class PageUrlSerializer(serializers.ModelSerializer):
@@ -81,7 +85,8 @@ class PageMetaViewSet(viewsets.ReadOnlyModelViewSet):
     
     """
 
-    queryset = PageMeta.objects.all().order_by('slug')
+    queryset = PageMeta.objects.all().order_by('name')
+    lookup_field = 'slug'
 
     def get_serializer_class(self):
         if self.action == 'list':
