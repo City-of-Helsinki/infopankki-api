@@ -46,3 +46,12 @@ class Page(BaseModel):
 class Embed(models.Model):
     page = models.ForeignKey(Page, related_name='embeds')
     uri = models.URLField(blank=True, null=True)
+
+
+class PageMeta(BaseModel):
+    name = models.CharField("Meta field name", max_length=200)
+    slug = models.SlugField("Meta field slug")
+    pages = models.ManyToManyField(Page)
+
+    def __repr__(self):
+        return self.name
