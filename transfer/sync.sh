@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-echo "Transfer infopankki data"
-lftp -f ${INFOPANKKI_DATA_PATH}/lftp_sync
+if [[ -z ${INFOPANKKI_SYNC_SCRIPT} ]]; 
+then 
+	echo "Transfer infopankki data"
+	lftp -f ${INFOPANKKI_SYNC_SCRIPT}
+else
+	echo "No sync script, exiting"
+	exit 1
+fi
 
 rc=$?;
 if [[ ${rc} != 0 ]]; then exit ${rc}; fi
