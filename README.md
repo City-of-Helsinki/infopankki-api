@@ -2,5 +2,5 @@
 [![codecov](https://codecov.io/gh/City-of-Helsinki/infopankki-api/branch/master/graph/badge.svg)](https://codecov.io/gh/City-of-Helsinki/infopankki-api)
 [![Requirements](https://requires.io/github/City-of-Helsinki/infopankki-api/requirements.svg?branch=master)](https://requires.io/github/City-of-Helsinki/infopankki-api/requirements/?branch=master)
 
-# infopankki-api
-Infopankki API http://www.infopankki.fi/en/frontpage
+# infoFinland API
+infoFinland API http://www.infofinland.fi/en/frontpage
