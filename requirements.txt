@@ -23,7 +23,7 @@ flake8==3.5.0
 idna==2.6                 # via requests
 itypes==1.1.0             # via coreapi
 jinja2==2.10              # via coreschema
-lxml==4.2.0
+lxml==4.3.1
 markupsafe==1.0           # via jinja2
 mccabe==0.6.1             # via flake8
 pluggy==0.6.0             # via pytest
@@ -37,11 +37,11 @@ pytest==3.4.2             # via pytest-django, pytest-sugar
 python-dateutil==2.7.0    # via faker
 pytz==2018.3              # via django
 raven==6.5.0
-requests==2.18.4
-six==1.11.0               # via django-coverage-plugin, django-environ, django-extensions, faker, pytest, python-dateutil
+requests==2.21.0
+six==1.12.0               # via django-coverage-plugin, django-environ, django-extensions, faker, pytest, python-dateutil
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.2       # via faker
 uritemplate==3.0.0        # via coreapi
-urllib3==1.22             # via requests
+urllib3==1.24.1             # via requests
 whitenoise==3.3.1
 xlsxwriter==1.0.2
