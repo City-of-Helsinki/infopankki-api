@@ -8,6 +8,7 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+container: ubuntu:18.04
 strategy:
   matrix:
     Python35:
