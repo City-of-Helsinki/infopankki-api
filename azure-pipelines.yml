@@ -13,7 +13,7 @@ container: python:3.6
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '$(PYTHON_VERSION)'
+    versionSpec: '3.6'
     architecture: 'x64'
 
 - task: PythonScript@0
