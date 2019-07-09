@@ -1,0 +1,80 @@
+resources:
+  containers:
+  - container: db
+    image: postgres:11
+    env:
+      POSTGRES_USER: "django"
+      POSTGRES_PASSWORD: "djangotest"
+      POSTGRES_DB: "infopankki"
+  - container: copy36
+    image: python:3.6
+    env:
+      DATABASE_URL: "postgresql://django:djangotest@db/infopankki"
+
+variables:
+  tag1: '$(Build.SourceBranchName)'
+  tag2: '$(Build.SourceVersion)'
+
+jobs:
+- job: RunInContainer
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+  services:
+    db: db
+
+  strategy:
+    matrix:
+      py36:
+        containerResource: copy36
+
+  container: $[ variables['containerResource'] ]
+
+  steps:
+    - task: PythonScript@0
+      displayName: 'Export project path'
+      inputs:
+        scriptSource: 'inline'
+        script: |
+          """Search all subdirectories for `manage.py`."""
+          from glob import iglob
+          from os import path
+          # Python >= 3.5
+          manage_py = next(iglob(path.join('**', 'manage.py'), recursive=True), None)
+          if not manage_py:
+              raise SystemExit('Could not find a Django project')
+          project_location = path.dirname(path.abspath(manage_py))
+          print('Found Django project in', project_location)
+          print('##vso[task.setvariable variable=projectRoot]{}'.format(project_location))
+
+    - script: printenv
+    - script: |
+        python -m pip install --upgrade pip
+        python -m venv ./venv
+        ./venv/bin/pip install -r requirements.txt
+      displayName: 'Install prerequisites'
+    - script: |
+        pushd '$(projectRoot)'
+        ./venv/bin/python manage.py test
+
+- job: Build
+  dependsOn: RunInContainer
+  displayName: Build container image
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - task: Docker@2
+    condition: |
+      not
+      (
+        eq(variables['Build.SourceBranchName'], 'merge')
+      )
+    displayName: Build and push an image to container registry
+    inputs:
+      containerRegistry: 'dok'
+      repository: 'roninen/infopankki'
+      command: 'buildAndPush'
+      Dockerfile: '**/Dockerfile'
+      tags: |
+         $(tag1)
+         $(tag2)
