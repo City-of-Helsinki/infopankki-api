@@ -52,3 +52,11 @@ jobs:
     - script: |
         pushd '$(projectRoot)'
         ./venv/bin/python manage.py test
+  
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        containerRegistry: 'dok'
+        repository: 'infopankki'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
