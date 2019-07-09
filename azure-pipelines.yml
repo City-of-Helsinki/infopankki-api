@@ -38,4 +38,4 @@ jobs:
       displayName: 'Install prerequisites'
     - script: |
         pushd '$(projectRoot)'
-        python manage.py
+        python manage.py test
