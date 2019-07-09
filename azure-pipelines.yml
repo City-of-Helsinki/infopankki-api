@@ -11,6 +11,9 @@ resources:
     env:
       DATABASE_URL: "postgresql://django:djangotest@db/infopankki"
 
+variables:
+  tag1: '$(Build.SourceBranchName)'
+  tag2: '$(Build.SourceVersion)'
 
 jobs:
 - job: RunInContainer
@@ -68,5 +71,5 @@ jobs:
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
       tags: |
-         '$(Build.SourceBranchName)'
-         '$(Build.SourceVersion)'
+         $(tag1)
+         $(tag2)
