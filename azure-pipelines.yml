@@ -1,12 +1,23 @@
 resources:
   containers:
+  - container: db
+    image: postgres:11
+    env:
+      POSTGRES_USER: "django"
+      POSTGRES_PASSWORD: "djangotest"
+      POSTGRES_DB: "infopankki"
   - container: copy36
     image: python:3.6
+    env:
+      DATABASE_URL: "postgresql://django:djangotest@db/infopankki"
 
 jobs:
 - job: RunInContainer
   pool:
     vmImage: 'ubuntu-latest'
+  
+  services:
+    db: db
 
   strategy:
     matrix:
