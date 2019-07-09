@@ -67,3 +67,6 @@ jobs:
       repository: 'roninen/infopankki'
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
+      tags: |
+         $('Build.SourceBranchName')
+         $('Build.SourceVersion')
