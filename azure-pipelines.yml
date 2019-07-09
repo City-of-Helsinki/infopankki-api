@@ -34,8 +34,9 @@ jobs:
 
     - script: printenv
     - script: |
-        pip install -r requirements.txt
+        python -m venv
+        ./venv/bin/python -m pip install -r requirements.txt
       displayName: 'Install prerequisites'
     - script: |
         pushd '$(projectRoot)'
-        python manage.py test
+        ./venv/bin/python manage.py test
