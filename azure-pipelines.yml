@@ -68,5 +68,5 @@ jobs:
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
       tags: |
-         $('Build.SourceBranchName')
-         $('Build.SourceVersion')
+         '$(Build.SourceBranchName)'
+         '$(Build.SourceVersion)'
