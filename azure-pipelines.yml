@@ -55,7 +55,8 @@ jobs:
         ./venv/bin/python manage.py test
 
 - job: Build
-  displayName: Build conta9ner image
+  dependsOn: RunInContainer
+  displayName: Build container image
   pool:
     vmImage: 'ubuntu-latest'
   steps:
@@ -63,6 +64,6 @@ jobs:
     displayName: Build and push an image to container registry
     inputs:
       containerRegistry: 'dok'
-      repository: 'infopankki'
+      repository: 'roninen/infopankki'
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
