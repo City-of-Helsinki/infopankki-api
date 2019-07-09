@@ -34,8 +34,8 @@ jobs:
 
     - script: printenv
     - script: |
-        python -m venv
-        ./venv/bin/python -m pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
       displayName: 'Install prerequisites'
     - script: |
         pushd '$(projectRoot)'
