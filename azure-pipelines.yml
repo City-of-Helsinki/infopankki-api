@@ -64,6 +64,11 @@ jobs:
     vmImage: 'ubuntu-latest'
   steps:
   - task: Docker@2
+    condition: |
+      not
+      (
+        eq(variables['Build.SourceBranchName'], 'merge')
+      )
     displayName: Build and push an image to container registry
     inputs:
       containerRegistry: 'dok'
