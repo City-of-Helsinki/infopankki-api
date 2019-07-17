@@ -16,7 +16,9 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'sudo apt-get install gdal-bin gettext postgresql postgresql-client postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts'
+    script: |
+      sudo apt-get update
+      sudo apt-get install gdal-bin gettext postgresql postgresql-client postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
 
 - task: PythonScript@0
   displayName: 'Export project path'
