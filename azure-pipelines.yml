@@ -50,6 +50,6 @@ steps:
 
 - script: |
     pushd '$(projectRoot)'
-    export DATABASE_URL="postgis://info:info/infopankki"
+    export DATABASE_URL="postgis://info:info@localhost/infopankki"
     export DEBUG=False
     ./venv/bin/python manage.py test
