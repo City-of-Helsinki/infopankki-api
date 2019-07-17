@@ -22,6 +22,7 @@ steps:
       sudo -H -u postgres psql template1 -c 'create extension postgis;'
       sudo -H -u postgres psql template1 -c 'create extension hstore;'
       sudo -H -u postgres psql -c "CREATE USER info WITH PASSWORD 'info';"
+      sudo -H -u postgres psql -c "ALTER USER info WITH SUPERUSER;"
       sudo -H -u postgres createdb -O info infopankki
 
 
