@@ -21,6 +21,8 @@ steps:
       sudo apt-get install gdal-bin gettext postgresql postgresql-client postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-server-dev-9.5
       sudo -H -u postgres psql template1 -c 'create extension postgis;'
       sudo -H -u postgres psql template1 -c 'create extension hstore;'
+      sudo -H -u postgres psql -c "CREATE USER info WITH PASSWORD 'info';"
+      sudo -H -u postgres createdb -O info infopankki
 
 
 - task: PythonScript@0
@@ -48,4 +50,6 @@ steps:
 
 - script: |
     pushd '$(projectRoot)'
+    export DATABASE_URL="postgis://info:info/infopankki"
+    export DEBUG=False
     ./venv/bin/python manage.py test
