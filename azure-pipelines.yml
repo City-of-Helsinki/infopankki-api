@@ -18,7 +18,10 @@ steps:
     targetType: 'inline'
     script: |
       sudo apt-get update
-      sudo apt-get install gdal-bin gettext postgresql postgresql-client postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
+      sudo apt-get install gdal-bin gettext postgresql postgresql-client postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-server-dev-9.5
+      sudo -H -u postgres psql template1 -c 'create extension postgis;'
+      sudo -H -u postgres psql template1 -c 'create extension hstore;'
+
 
 - task: PythonScript@0
   displayName: 'Export project path'
