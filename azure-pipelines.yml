@@ -62,4 +62,5 @@ jobs:
       displayName: 'Install prerequisites'
     - script: |
         pushd '$(projectRoot)'
-        ./venv/bin/pytest
+        python manage.py test
+        displayName: 'Run tests'
