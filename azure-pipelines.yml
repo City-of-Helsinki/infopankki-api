@@ -14,7 +14,7 @@ resources:
   - container: copy36
     image: python:3.6
     env:
-      DATABASE_URL: "postgis://django:djangotest@db/infopankki"
+      DATABASE_URL: "postgres://django:djangotest@db/infopankki"
 
 variables:
   tag1: '$(Build.SourceBranchName)'
