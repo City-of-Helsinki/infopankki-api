@@ -41,8 +41,8 @@ steps:
       print('##vso[task.setvariable variable=projectRoot]{}'.format(project_location))
 
 - script: |
-    apt update
-    apt install -y postgresql postgis
+    sudo apt update
+    sudo apt install -y postgresql postgis
   displayName: 'Install packages'
 
 - script: |
