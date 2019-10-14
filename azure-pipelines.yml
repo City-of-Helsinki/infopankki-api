@@ -69,6 +69,16 @@ jobs:
       inputs:
         dockerVersion: '17.09.0-ce'
         
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          "##vso[task.setvariable variable=tag]echo $(Build.SourceBranchName) | tr - _"
+      displayName: 'Set docker image tag name'
+      condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+    
+    - script: printenv
+    
     - task: Docker@2
       inputs:
         containerRegistry: 'azure_registry'
@@ -76,5 +86,5 @@ jobs:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |
-          '$(Build.SourceBranchName)'
+          '$(tag)'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
