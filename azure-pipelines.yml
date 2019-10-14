@@ -63,4 +63,10 @@ jobs:
     - script: |
         pushd '$(projectRoot)'
         ./venv/bin/python manage.py test
-        displayName: 'Run tests'
+      displayName: 'Run tests'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'azure_registry'
+        repository: 'infopankki'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
