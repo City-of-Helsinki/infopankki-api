@@ -75,6 +75,6 @@ jobs:
         repository: 'infopankki'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        # tags: |
-        #   $(BUILD_SOURCEBRANCHNAME)
+        tags: |
+          $(BUILD_SOURCEBRANCHNAME)
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
