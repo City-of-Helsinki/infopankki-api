@@ -76,5 +76,5 @@ jobs:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |
-          $(BUILD_SOURCEBRANCHNAME)
+          '$(Build.SourceBranchName)'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
