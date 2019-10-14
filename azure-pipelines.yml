@@ -73,7 +73,7 @@ jobs:
       inputs:
         targetType: 'inline'
         script: |
-          "export bar=${$BUILD_SOURCEBRANCHNAME//-/_}"
+          "export bar=${BUILD_SOURCEBRANCHNAME//-/_}"
           "##vso[task.setvariable variable=tag]echo $bar"
       displayName: 'Set docker image tag name'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
